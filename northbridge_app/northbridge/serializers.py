@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from northbridge.models import User
+from northbridge.models import User, Policy
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,3 +11,20 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ("name", "email", "is_active")
         read_only_fields = ("name", "email", "is_active")
+
+
+class PolicySerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Policy model
+    """
+
+    user = serializers.SlugRelatedField(
+        slug_field="email", queryset=User.objects.all(), required=True
+    )
+    state = serializers.CharField(source='get_state_display')
+    start_date = serializers.DateTimeField(read_only=True, format="%Y-%m-%d")
+
+    class Meta:
+        model = Policy
+        fields = ("user", "hash_id", "start_date", "state")
+        read_only_fields = ("user", "hash_id", "start_date", "state")
