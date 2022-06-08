@@ -43,6 +43,4 @@ This is also loaded as part of the setup process
 ## Future Improvements - If I had more time
 1. Add Authentication to secure API calls
 2. Add pytest for API and user report views
-and consequently not create duplicate Match
-3. Add an Admin Page
 4. Add visualize the user visits with the help of charts
