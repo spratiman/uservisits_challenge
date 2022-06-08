@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from northbridge.models import User, Policy, Page
+from northbridge.models import User, Policy, Page, Visits
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -39,3 +39,21 @@ class PageSerializer(serializers.ModelSerializer):
         model = Page
         fields = ("name",)
         read_only_fields = ("name",)
+
+
+class VisitsSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Visits model
+    """
+    created = serializers.DateTimeField(read_only=True, format="%Y-%m-%d")
+    policy = serializers.SlugRelatedField(
+        slug_field="hash_id", queryset=Policy.objects.all(), required=True
+    )
+    page = serializers.SlugRelatedField(
+        slug_field="name", queryset=Page.objects.all(), required=True
+    )
+
+    class Meta:
+        model = Visits
+        fields = ("created", "policy", "page")
+        read_only_fields = ("created", "policy", "page")
