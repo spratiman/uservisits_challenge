@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework_json_api.views import ModelViewSet
 from northbridge.serializers import UserSerializer, PolicySerializer, PageSerializer, VisitsSerializer
 from northbridge.models import User, Policy, Page, Visits
@@ -25,3 +26,13 @@ class VisitsAPIView(ModelViewSet):
     serializer_class = VisitsSerializer
     http_methods = ["get"]
     queryset = Visits.objects.all()
+
+
+def display_users(request):
+    """
+    Fetch all users and render the data in a table view
+    """
+
+    users = User.objects.all()
+    context = {"users": users}
+    return render(request, "index.html", context)
