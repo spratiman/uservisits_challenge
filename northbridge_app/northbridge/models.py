@@ -4,6 +4,7 @@ from binascii import hexlify
 from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from model_utils.models import TimeStampedModel
 
 
 class User(models.Model):
@@ -80,4 +81,25 @@ class Page(models.Model):
 
     name = models.CharField(
         max_length=20, unique=True
+    )
+
+
+class Visits(TimeStampedModel):
+    """
+    Log of each user visits to Northbridge Website pages
+    """
+
+    policy = models.ForeignKey(
+        to=Policy,
+        on_delete=models.DO_NOTHING,
+        blank=False,
+        null=False,
+        related_name="visits_policy"
+    )
+    page = models.ForeignKey(
+        to=Page,
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+        related_name="visits_page"
     )
