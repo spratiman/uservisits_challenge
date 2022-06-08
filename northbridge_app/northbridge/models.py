@@ -39,7 +39,7 @@ def _create_hash_id():
     """
     Generates a 10 character long hash
     """
-    return hexlify(os.random(10))
+    return hexlify(os.urandom(32)).decode()[:10]
 
 
 class Policy(models.Model):
