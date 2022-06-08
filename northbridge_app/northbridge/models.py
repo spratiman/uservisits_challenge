@@ -71,3 +71,13 @@ class Policy(models.Model):
         default=PENDING_POLICY,
         max_length=1,
     )
+
+
+class Page(models.Model):
+    """
+    List of Northbridge Website page names
+    """
+
+    name = models.CharField(
+        max_length=20, unique=True
+    )
