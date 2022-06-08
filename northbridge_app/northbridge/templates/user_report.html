@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title> Northbridge </title>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <h3>User Visit data over different duration</h3>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Page</th>
+                    <th scope="col">1 Day</th>
+                    <th scope="col">7 Days</th>
+                    <th scope="col">30 Days</th>
+                    <th scope="col">4 Months</th>
+                    <th scope="col">6 Months</th>
+                    <th scope="col">12 Months</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for page, visits_data in data.items %}
+                <tr>
+                    <th scope="row">{{ page }}</th>
+                    {% for visits in visits_data %}
+                    <td>{{ visits }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
